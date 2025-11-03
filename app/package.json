@@ -1,0 +1,14 @@
+
+
+{
+  "name": "student-dashboard",
+  "version": "1.0.0",
+  "description": "A simple student dashboard application.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    
+  }
+}

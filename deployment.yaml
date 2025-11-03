@@ -1,0 +1,44 @@
+# deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-dashboard-deployment
+  labels:
+    app: student-dashboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: student-dashboard
+  template:
+    metadata:
+      labels:
+        app: student-dashboard
+    spec:
+      containers:
+      - name: student-dashboard-container
+        # Placeholder image - Jenkins will update this with the specific tag!
+        image: YOUR_DOCKERHUB_USERNAME/student-dashboard:latest
+        ports:
+        - containerPort: 8080 
+        env:
+        # The environment variable read by server.js to display environment info
+        - name: ENVIRONMENT
+          value: "dynamic-env" # This value will be overridden by the Jenkinsfile logic
+        - name: COMMIT_SHA
+          value: "dynamic-sha" # This value will be overridden by the Jenkinsfile logic
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-dashboard-service
+spec:
+  # LoadBalancer is ideal for Minikube/local testing to expose the port
+  type: LoadBalancer 
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: student-dashboard

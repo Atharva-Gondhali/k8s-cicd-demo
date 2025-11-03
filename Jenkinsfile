@@ -11,7 +11,7 @@ pipeline {
         
         // Replace with your DockerHub username
         DOCKERHUB_CREDENTIALS_ID = 'docker-hub-credentials'
-        DOCKERHUB_REPO = 'YOUR_DOCKERHUB_USERNAME/student-dashboard'
+        DOCKERHUB_REPO = 'atharvag24/student-dashboard'
     }
     
     stages {
